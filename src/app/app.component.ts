@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PeopleService } from './services/people.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-di-hw';
+
+  people = [];
+
+  constructor(private service:PeopleService){
+    this.getData();
+  }
+
+   getData(){
+    this.service.getPeople().subscribe(response => {
+      //debugger;
+      this.people = response.results;
+    });
+  }
+
+
 }
