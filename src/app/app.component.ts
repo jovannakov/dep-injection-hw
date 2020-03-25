@@ -8,19 +8,36 @@ import { PeopleService } from './services/people.service';
 })
 export class AppComponent {
   title = 'angular-di-hw';
-
+  public page = 1;
   people = [];
 
   constructor(private service:PeopleService){
-    this.getData();
+    this.getData(this.page);
   }
 
-   getData(){
-    this.service.getPeople().subscribe(response => {
+   getData(page){
+    this.service.getPeople(page).subscribe(response => {
       //debugger;
-      this.people = response.results;
+      let temporary = response;
+      console.log(response);
+      debugger;
+      this.people = temporary.results;
     });
   }
 
+  NextPage(){
+    if(this.page <= 5){
+      this.page++;
+      this.getData(this.page);
+    }
+
+  }
+
+  PreviousPage(){
+    if(this.page > 1){
+      this.page--;
+      this.getData(this.page);
+    }
+  }
 
 }

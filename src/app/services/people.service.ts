@@ -5,11 +5,11 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class PeopleService {
-  private URL = `https://swapi.co/api/people/`;
+  private URL = `https://swapi.co/api/people/?page=`;
 
   constructor(private http:HttpClient) { }
 
-  getPeople(){
-    return this.http.get(this.URL);
+  getPeople(page:number){
+    return this.http.get(`${this.URL}${page}`);
   }
 }
